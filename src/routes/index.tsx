@@ -1,26 +1,20 @@
 import { createFileRoute } from "@tanstack/react-router";
+import Dashboard from "@/components/casper/Dashboard";
+import { useCasper } from "@/lib/casper-context";
 
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "Dashboard // Casper" },
+      { name: "description", content: "Live system telemetry: CPU, memory, disk, and device identity." },
+      { property: "og:title", content: "Dashboard // Casper" },
+      { property: "og:description", content: "Live system telemetry: CPU, memory, disk, and device identity." },
+    ],
+  }),
+  component: Page,
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
-
-function Index() {
-  return <PlaceholderIndex />;
+function Page() {
+  const { monitorRunning } = useCasper();
+  return <Dashboard monitorRunning={monitorRunning} />;
 }
