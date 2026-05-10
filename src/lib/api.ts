@@ -43,4 +43,12 @@ export const api = {
     fetchApi('/api/malware/deploy', { method: 'POST', body: JSON.stringify({ sample_id, channel, target }) }),
   chat: (message: string, history: any[]) => 
     fetchApi('/api/chat', { method: 'POST', body: JSON.stringify({ message, history }) }),
+  // ── HRV / RF Sonar ──────────────────────────────────────────────
+  hrvBuilding: () => fetchApi('/api/hrv/building'),
+  hrvZones: () => fetchApi('/api/hrv/zones'),
+  hrvZone: (zoneId: string) => fetchApi(`/api/hrv/zone/${encodeURIComponent(zoneId)}`),
+  hrvZoneHistory: (zoneId: string) =>
+    fetchApi(`/api/hrv/zone/${encodeURIComponent(zoneId)}/history`),
+  hrvIngest: (zoneId: string, amplitude: number) =>
+    fetchApi('/api/hrv/ingest', { method: 'POST', body: JSON.stringify({ zone_id: zoneId, amplitude }) }),
 };
