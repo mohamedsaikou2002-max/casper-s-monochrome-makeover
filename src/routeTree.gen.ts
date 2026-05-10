@@ -9,12 +9,60 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WirelessRouteImport } from './routes/wireless'
+import { Route as TrafficRouteImport } from './routes/traffic'
+import { Route as TerminalRouteImport } from './routes/terminal'
+import { Route as PhoneScanRouteImport } from './routes/phone-scan'
+import { Route as MalwareLibRouteImport } from './routes/malware-lib'
+import { Route as IpScanRouteImport } from './routes/ip-scan'
+import { Route as FileScanRouteImport } from './routes/file-scan'
 import { Route as ConnectionsRouteImport } from './routes/connections'
+import { Route as AichatRouteImport } from './routes/aichat'
 import { Route as IndexRouteImport } from './routes/index'
 
+const WirelessRoute = WirelessRouteImport.update({
+  id: '/wireless',
+  path: '/wireless',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrafficRoute = TrafficRouteImport.update({
+  id: '/traffic',
+  path: '/traffic',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TerminalRoute = TerminalRouteImport.update({
+  id: '/terminal',
+  path: '/terminal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PhoneScanRoute = PhoneScanRouteImport.update({
+  id: '/phone-scan',
+  path: '/phone-scan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MalwareLibRoute = MalwareLibRouteImport.update({
+  id: '/malware-lib',
+  path: '/malware-lib',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IpScanRoute = IpScanRouteImport.update({
+  id: '/ip-scan',
+  path: '/ip-scan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FileScanRoute = FileScanRouteImport.update({
+  id: '/file-scan',
+  path: '/file-scan',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ConnectionsRoute = ConnectionsRouteImport.update({
   id: '/connections',
   path: '/connections',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AichatRoute = AichatRouteImport.update({
+  id: '/aichat',
+  path: '/aichat',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -25,37 +73,156 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/aichat': typeof AichatRoute
   '/connections': typeof ConnectionsRoute
+  '/file-scan': typeof FileScanRoute
+  '/ip-scan': typeof IpScanRoute
+  '/malware-lib': typeof MalwareLibRoute
+  '/phone-scan': typeof PhoneScanRoute
+  '/terminal': typeof TerminalRoute
+  '/traffic': typeof TrafficRoute
+  '/wireless': typeof WirelessRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/aichat': typeof AichatRoute
   '/connections': typeof ConnectionsRoute
+  '/file-scan': typeof FileScanRoute
+  '/ip-scan': typeof IpScanRoute
+  '/malware-lib': typeof MalwareLibRoute
+  '/phone-scan': typeof PhoneScanRoute
+  '/terminal': typeof TerminalRoute
+  '/traffic': typeof TrafficRoute
+  '/wireless': typeof WirelessRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/aichat': typeof AichatRoute
   '/connections': typeof ConnectionsRoute
+  '/file-scan': typeof FileScanRoute
+  '/ip-scan': typeof IpScanRoute
+  '/malware-lib': typeof MalwareLibRoute
+  '/phone-scan': typeof PhoneScanRoute
+  '/terminal': typeof TerminalRoute
+  '/traffic': typeof TrafficRoute
+  '/wireless': typeof WirelessRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/connections'
+  fullPaths:
+    | '/'
+    | '/aichat'
+    | '/connections'
+    | '/file-scan'
+    | '/ip-scan'
+    | '/malware-lib'
+    | '/phone-scan'
+    | '/terminal'
+    | '/traffic'
+    | '/wireless'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/connections'
-  id: '__root__' | '/' | '/connections'
+  to:
+    | '/'
+    | '/aichat'
+    | '/connections'
+    | '/file-scan'
+    | '/ip-scan'
+    | '/malware-lib'
+    | '/phone-scan'
+    | '/terminal'
+    | '/traffic'
+    | '/wireless'
+  id:
+    | '__root__'
+    | '/'
+    | '/aichat'
+    | '/connections'
+    | '/file-scan'
+    | '/ip-scan'
+    | '/malware-lib'
+    | '/phone-scan'
+    | '/terminal'
+    | '/traffic'
+    | '/wireless'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AichatRoute: typeof AichatRoute
   ConnectionsRoute: typeof ConnectionsRoute
+  FileScanRoute: typeof FileScanRoute
+  IpScanRoute: typeof IpScanRoute
+  MalwareLibRoute: typeof MalwareLibRoute
+  PhoneScanRoute: typeof PhoneScanRoute
+  TerminalRoute: typeof TerminalRoute
+  TrafficRoute: typeof TrafficRoute
+  WirelessRoute: typeof WirelessRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/wireless': {
+      id: '/wireless'
+      path: '/wireless'
+      fullPath: '/wireless'
+      preLoaderRoute: typeof WirelessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/traffic': {
+      id: '/traffic'
+      path: '/traffic'
+      fullPath: '/traffic'
+      preLoaderRoute: typeof TrafficRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terminal': {
+      id: '/terminal'
+      path: '/terminal'
+      fullPath: '/terminal'
+      preLoaderRoute: typeof TerminalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/phone-scan': {
+      id: '/phone-scan'
+      path: '/phone-scan'
+      fullPath: '/phone-scan'
+      preLoaderRoute: typeof PhoneScanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/malware-lib': {
+      id: '/malware-lib'
+      path: '/malware-lib'
+      fullPath: '/malware-lib'
+      preLoaderRoute: typeof MalwareLibRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ip-scan': {
+      id: '/ip-scan'
+      path: '/ip-scan'
+      fullPath: '/ip-scan'
+      preLoaderRoute: typeof IpScanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/file-scan': {
+      id: '/file-scan'
+      path: '/file-scan'
+      fullPath: '/file-scan'
+      preLoaderRoute: typeof FileScanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/connections': {
       id: '/connections'
       path: '/connections'
       fullPath: '/connections'
       preLoaderRoute: typeof ConnectionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/aichat': {
+      id: '/aichat'
+      path: '/aichat'
+      fullPath: '/aichat'
+      preLoaderRoute: typeof AichatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -70,7 +237,15 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AichatRoute: AichatRoute,
   ConnectionsRoute: ConnectionsRoute,
+  FileScanRoute: FileScanRoute,
+  IpScanRoute: IpScanRoute,
+  MalwareLibRoute: MalwareLibRoute,
+  PhoneScanRoute: PhoneScanRoute,
+  TerminalRoute: TerminalRoute,
+  TrafficRoute: TrafficRoute,
+  WirelessRoute: WirelessRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
