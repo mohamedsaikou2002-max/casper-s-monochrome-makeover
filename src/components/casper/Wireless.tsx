@@ -30,7 +30,7 @@ export default function Wireless() {
   const lookupMac = async (mac: string) => {
     try {
       const data = await api.lookupMac(mac);
-      alert(`MAC: ${mac}\nVendor: ${d.vendor}`);
+      alert(`MAC: ${mac}\nVendor: ${data.vendor}`);
     } catch (e) {}
   };
 
