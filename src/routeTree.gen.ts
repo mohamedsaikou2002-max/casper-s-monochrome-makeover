@@ -19,6 +19,7 @@ import { Route as FileScanRouteImport } from './routes/file-scan'
 import { Route as ConnectionsRouteImport } from './routes/connections'
 import { Route as AichatRouteImport } from './routes/aichat'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as HrvIndexRouteImport } from './routes/hrv.index'
 
 const WirelessRoute = WirelessRouteImport.update({
   id: '/wireless',
@@ -70,6 +71,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HrvIndexRoute = HrvIndexRouteImport.update({
+  id: '/hrv/',
+  path: '/hrv/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -82,6 +88,7 @@ export interface FileRoutesByFullPath {
   '/terminal': typeof TerminalRoute
   '/traffic': typeof TrafficRoute
   '/wireless': typeof WirelessRoute
+  '/hrv/': typeof HrvIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -94,6 +101,7 @@ export interface FileRoutesByTo {
   '/terminal': typeof TerminalRoute
   '/traffic': typeof TrafficRoute
   '/wireless': typeof WirelessRoute
+  '/hrv': typeof HrvIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -107,6 +115,7 @@ export interface FileRoutesById {
   '/terminal': typeof TerminalRoute
   '/traffic': typeof TrafficRoute
   '/wireless': typeof WirelessRoute
+  '/hrv/': typeof HrvIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -121,6 +130,7 @@ export interface FileRouteTypes {
     | '/terminal'
     | '/traffic'
     | '/wireless'
+    | '/hrv/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -133,6 +143,7 @@ export interface FileRouteTypes {
     | '/terminal'
     | '/traffic'
     | '/wireless'
+    | '/hrv'
   id:
     | '__root__'
     | '/'
@@ -145,6 +156,7 @@ export interface FileRouteTypes {
     | '/terminal'
     | '/traffic'
     | '/wireless'
+    | '/hrv/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -158,6 +170,7 @@ export interface RootRouteChildren {
   TerminalRoute: typeof TerminalRoute
   TrafficRoute: typeof TrafficRoute
   WirelessRoute: typeof WirelessRoute
+  HrvIndexRoute: typeof HrvIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -232,6 +245,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/hrv/': {
+      id: '/hrv/'
+      path: '/hrv'
+      fullPath: '/hrv/'
+      preLoaderRoute: typeof HrvIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -246,7 +266,18 @@ const rootRouteChildren: RootRouteChildren = {
   TerminalRoute: TerminalRoute,
   TrafficRoute: TrafficRoute,
   WirelessRoute: WirelessRoute,
+  HrvIndexRoute: HrvIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
