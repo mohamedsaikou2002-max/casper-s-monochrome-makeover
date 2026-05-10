@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { api } from '../lib/api';
+import { api } from '@/lib/api';
 
 export default function AIChat() {
   const [messages, setMessages] = useState<any[]>([]);

@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { api } from '../lib/api';
+import { api } from '@/lib/api';
 
 export default function FileScan() {
   const [loading, setLoading] = useState(false);

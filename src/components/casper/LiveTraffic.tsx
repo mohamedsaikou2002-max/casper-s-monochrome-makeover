@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { api } from '../lib/api';
+import { api } from '@/lib/api';
 
 export default function LiveTraffic() {
   const [interfaces, setInterfaces] = useState<any[]>([]);

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { api } from '../lib/api';
+import { api } from '@/lib/api';
 
 export default function Connections({ monitorRunning }: { monitorRunning: boolean }) {
   const [conns, setConns] = useState<any[]>([]);
