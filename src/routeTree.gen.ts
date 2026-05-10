@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as WirelessRouteImport } from './routes/wireless'
 import { Route as TrafficRouteImport } from './routes/traffic'
 import { Route as TerminalRouteImport } from './routes/terminal'
+import { Route as RfSonarRouteImport } from './routes/rf-sonar'
 import { Route as PhoneScanRouteImport } from './routes/phone-scan'
 import { Route as MalwareLibRouteImport } from './routes/malware-lib'
 import { Route as IpScanRouteImport } from './routes/ip-scan'
@@ -19,6 +20,8 @@ import { Route as FileScanRouteImport } from './routes/file-scan'
 import { Route as ConnectionsRouteImport } from './routes/connections'
 import { Route as AichatRouteImport } from './routes/aichat'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as HrvIndexRouteImport } from './routes/hrv.index'
+import { Route as HrvZoneIdRouteImport } from './routes/hrv.$zoneId'
 
 const WirelessRoute = WirelessRouteImport.update({
   id: '/wireless',
@@ -33,6 +36,11 @@ const TrafficRoute = TrafficRouteImport.update({
 const TerminalRoute = TerminalRouteImport.update({
   id: '/terminal',
   path: '/terminal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RfSonarRoute = RfSonarRouteImport.update({
+  id: '/rf-sonar',
+  path: '/rf-sonar',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PhoneScanRoute = PhoneScanRouteImport.update({
@@ -70,6 +78,16 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HrvIndexRoute = HrvIndexRouteImport.update({
+  id: '/hrv/',
+  path: '/hrv/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HrvZoneIdRoute = HrvZoneIdRouteImport.update({
+  id: '/hrv/$zoneId',
+  path: '/hrv/$zoneId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -79,9 +97,12 @@ export interface FileRoutesByFullPath {
   '/ip-scan': typeof IpScanRoute
   '/malware-lib': typeof MalwareLibRoute
   '/phone-scan': typeof PhoneScanRoute
+  '/rf-sonar': typeof RfSonarRoute
   '/terminal': typeof TerminalRoute
   '/traffic': typeof TrafficRoute
   '/wireless': typeof WirelessRoute
+  '/hrv/$zoneId': typeof HrvZoneIdRoute
+  '/hrv/': typeof HrvIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -91,9 +112,12 @@ export interface FileRoutesByTo {
   '/ip-scan': typeof IpScanRoute
   '/malware-lib': typeof MalwareLibRoute
   '/phone-scan': typeof PhoneScanRoute
+  '/rf-sonar': typeof RfSonarRoute
   '/terminal': typeof TerminalRoute
   '/traffic': typeof TrafficRoute
   '/wireless': typeof WirelessRoute
+  '/hrv/$zoneId': typeof HrvZoneIdRoute
+  '/hrv': typeof HrvIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -104,9 +128,12 @@ export interface FileRoutesById {
   '/ip-scan': typeof IpScanRoute
   '/malware-lib': typeof MalwareLibRoute
   '/phone-scan': typeof PhoneScanRoute
+  '/rf-sonar': typeof RfSonarRoute
   '/terminal': typeof TerminalRoute
   '/traffic': typeof TrafficRoute
   '/wireless': typeof WirelessRoute
+  '/hrv/$zoneId': typeof HrvZoneIdRoute
+  '/hrv/': typeof HrvIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -118,9 +145,12 @@ export interface FileRouteTypes {
     | '/ip-scan'
     | '/malware-lib'
     | '/phone-scan'
+    | '/rf-sonar'
     | '/terminal'
     | '/traffic'
     | '/wireless'
+    | '/hrv/$zoneId'
+    | '/hrv/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -130,9 +160,12 @@ export interface FileRouteTypes {
     | '/ip-scan'
     | '/malware-lib'
     | '/phone-scan'
+    | '/rf-sonar'
     | '/terminal'
     | '/traffic'
     | '/wireless'
+    | '/hrv/$zoneId'
+    | '/hrv'
   id:
     | '__root__'
     | '/'
@@ -142,9 +175,12 @@ export interface FileRouteTypes {
     | '/ip-scan'
     | '/malware-lib'
     | '/phone-scan'
+    | '/rf-sonar'
     | '/terminal'
     | '/traffic'
     | '/wireless'
+    | '/hrv/$zoneId'
+    | '/hrv/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -155,9 +191,12 @@ export interface RootRouteChildren {
   IpScanRoute: typeof IpScanRoute
   MalwareLibRoute: typeof MalwareLibRoute
   PhoneScanRoute: typeof PhoneScanRoute
+  RfSonarRoute: typeof RfSonarRoute
   TerminalRoute: typeof TerminalRoute
   TrafficRoute: typeof TrafficRoute
   WirelessRoute: typeof WirelessRoute
+  HrvZoneIdRoute: typeof HrvZoneIdRoute
+  HrvIndexRoute: typeof HrvIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -181,6 +220,13 @@ declare module '@tanstack/react-router' {
       path: '/terminal'
       fullPath: '/terminal'
       preLoaderRoute: typeof TerminalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rf-sonar': {
+      id: '/rf-sonar'
+      path: '/rf-sonar'
+      fullPath: '/rf-sonar'
+      preLoaderRoute: typeof RfSonarRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/phone-scan': {
@@ -232,6 +278,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/hrv/': {
+      id: '/hrv/'
+      path: '/hrv'
+      fullPath: '/hrv/'
+      preLoaderRoute: typeof HrvIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hrv/$zoneId': {
+      id: '/hrv/$zoneId'
+      path: '/hrv/$zoneId'
+      fullPath: '/hrv/$zoneId'
+      preLoaderRoute: typeof HrvZoneIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -243,20 +303,13 @@ const rootRouteChildren: RootRouteChildren = {
   IpScanRoute: IpScanRoute,
   MalwareLibRoute: MalwareLibRoute,
   PhoneScanRoute: PhoneScanRoute,
+  RfSonarRoute: RfSonarRoute,
   TerminalRoute: TerminalRoute,
   TrafficRoute: TrafficRoute,
   WirelessRoute: WirelessRoute,
+  HrvZoneIdRoute: HrvZoneIdRoute,
+  HrvIndexRoute: HrvIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
