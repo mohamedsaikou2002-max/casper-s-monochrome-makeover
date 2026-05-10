@@ -1,4 +1,6 @@
-export const BACKEND_URL = 'http://127.0.0.1:5000';
+export const BACKEND_URL =
+  (import.meta.env.VITE_BACKEND_URL as string | undefined) ?? 'http://127.0.0.1:5000';
+const API_KEY = import.meta.env.VITE_API_KEY as string | undefined;
 
 export async function fetchApi(endpoint: string, options: RequestInit = {}) {
   const url = `${BACKEND_URL}${endpoint}`;
@@ -6,6 +8,7 @@ export async function fetchApi(endpoint: string, options: RequestInit = {}) {
     ...options,
     headers: {
       'Content-Type': 'application/json',
+      ...(API_KEY ? { 'X-API-Key': API_KEY } : {}),
       ...options.headers,
     },
   });
