@@ -51,4 +51,12 @@ export const api = {
     fetchApi(`/api/hrv/zone/${encodeURIComponent(zoneId)}/history`),
   hrvIngest: (zoneId: string, amplitude: number) =>
     fetchApi('/api/hrv/ingest', { method: 'POST', body: JSON.stringify({ zone_id: zoneId, amplitude }) }),
+  // ── Recon (casper-recon FastAPI) ────────────────────────────────
+  recon: (target: string, fast_scan = true) =>
+    fetchApi('/recon', { method: 'POST', body: JSON.stringify({ target, scope_confirmed: true, fast_scan }) }),
+  reconJob: (jobId: string) => fetchApi(`/jobs/${encodeURIComponent(jobId)}`),
+  reconApprove: (job_id: string, suggestion_id: string, approved_by: string, notes?: string) =>
+    fetchApi('/approve', { method: 'POST', body: JSON.stringify({ job_id, suggestion_id, approved_by, notes }) }),
+  reconManualInstructions: (jobId: string, suggestionId: string) =>
+    fetchApi(`/manual-instructions/${encodeURIComponent(jobId)}/${encodeURIComponent(suggestionId)}`),
 };
