@@ -9,69 +9,24 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as WirelessRouteImport } from './routes/wireless'
-import { Route as TrafficRouteImport } from './routes/traffic'
-import { Route as TerminalRouteImport } from './routes/terminal'
-import { Route as RfSonarRouteImport } from './routes/rf-sonar'
-import { Route as ReconRouteImport } from './routes/recon'
-import { Route as PhoneScanRouteImport } from './routes/phone-scan'
-import { Route as MalwareLibRouteImport } from './routes/malware-lib'
-import { Route as IpScanRouteImport } from './routes/ip-scan'
-import { Route as FileScanRouteImport } from './routes/file-scan'
-import { Route as ConnectionsRouteImport } from './routes/connections'
-import { Route as AichatRouteImport } from './routes/aichat'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AichatRouteImport } from './routes/aichat'
+import { Route as ConnectionsRouteImport } from './routes/connections'
+import { Route as FileScanRouteImport } from './routes/file-scan'
+import { Route as IpScanRouteImport } from './routes/ip-scan'
+import { Route as MalwareLibRouteImport } from './routes/malware-lib'
+import { Route as PhoneScanRouteImport } from './routes/phone-scan'
+import { Route as ReconRouteImport } from './routes/recon'
+import { Route as RfSonarRouteImport } from './routes/rf-sonar'
+import { Route as TerminalRouteImport } from './routes/terminal'
+import { Route as TrafficRouteImport } from './routes/traffic'
+import { Route as WirelessRouteImport } from './routes/wireless'
 import { Route as HrvIndexRouteImport } from './routes/hrv.index'
 import { Route as HrvZoneIdRouteImport } from './routes/hrv.$zoneId'
 
-const WirelessRoute = WirelessRouteImport.update({
-  id: '/wireless',
-  path: '/wireless',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TrafficRoute = TrafficRouteImport.update({
-  id: '/traffic',
-  path: '/traffic',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TerminalRoute = TerminalRouteImport.update({
-  id: '/terminal',
-  path: '/terminal',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RfSonarRoute = RfSonarRouteImport.update({
-  id: '/rf-sonar',
-  path: '/rf-sonar',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ReconRoute = ReconRouteImport.update({
-  id: '/recon',
-  path: '/recon',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PhoneScanRoute = PhoneScanRouteImport.update({
-  id: '/phone-scan',
-  path: '/phone-scan',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MalwareLibRoute = MalwareLibRouteImport.update({
-  id: '/malware-lib',
-  path: '/malware-lib',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IpScanRoute = IpScanRouteImport.update({
-  id: '/ip-scan',
-  path: '/ip-scan',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FileScanRoute = FileScanRouteImport.update({
-  id: '/file-scan',
-  path: '/file-scan',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ConnectionsRoute = ConnectionsRouteImport.update({
-  id: '/connections',
-  path: '/connections',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AichatRoute = AichatRouteImport.update({
@@ -79,9 +34,54 @@ const AichatRoute = AichatRouteImport.update({
   path: '/aichat',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const ConnectionsRoute = ConnectionsRouteImport.update({
+  id: '/connections',
+  path: '/connections',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FileScanRoute = FileScanRouteImport.update({
+  id: '/file-scan',
+  path: '/file-scan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IpScanRoute = IpScanRouteImport.update({
+  id: '/ip-scan',
+  path: '/ip-scan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MalwareLibRoute = MalwareLibRouteImport.update({
+  id: '/malware-lib',
+  path: '/malware-lib',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PhoneScanRoute = PhoneScanRouteImport.update({
+  id: '/phone-scan',
+  path: '/phone-scan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReconRoute = ReconRouteImport.update({
+  id: '/recon',
+  path: '/recon',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RfSonarRoute = RfSonarRouteImport.update({
+  id: '/rf-sonar',
+  path: '/rf-sonar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TerminalRoute = TerminalRouteImport.update({
+  id: '/terminal',
+  path: '/terminal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrafficRoute = TrafficRouteImport.update({
+  id: '/traffic',
+  path: '/traffic',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WirelessRoute = WirelessRouteImport.update({
+  id: '/wireless',
+  path: '/wireless',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HrvIndexRoute = HrvIndexRouteImport.update({
@@ -214,74 +214,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/wireless': {
-      id: '/wireless'
-      path: '/wireless'
-      fullPath: '/wireless'
-      preLoaderRoute: typeof WirelessRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/traffic': {
-      id: '/traffic'
-      path: '/traffic'
-      fullPath: '/traffic'
-      preLoaderRoute: typeof TrafficRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/terminal': {
-      id: '/terminal'
-      path: '/terminal'
-      fullPath: '/terminal'
-      preLoaderRoute: typeof TerminalRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/rf-sonar': {
-      id: '/rf-sonar'
-      path: '/rf-sonar'
-      fullPath: '/rf-sonar'
-      preLoaderRoute: typeof RfSonarRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/recon': {
-      id: '/recon'
-      path: '/recon'
-      fullPath: '/recon'
-      preLoaderRoute: typeof ReconRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/phone-scan': {
-      id: '/phone-scan'
-      path: '/phone-scan'
-      fullPath: '/phone-scan'
-      preLoaderRoute: typeof PhoneScanRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/malware-lib': {
-      id: '/malware-lib'
-      path: '/malware-lib'
-      fullPath: '/malware-lib'
-      preLoaderRoute: typeof MalwareLibRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/ip-scan': {
-      id: '/ip-scan'
-      path: '/ip-scan'
-      fullPath: '/ip-scan'
-      preLoaderRoute: typeof IpScanRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/file-scan': {
-      id: '/file-scan'
-      path: '/file-scan'
-      fullPath: '/file-scan'
-      preLoaderRoute: typeof FileScanRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/connections': {
-      id: '/connections'
-      path: '/connections'
-      fullPath: '/connections'
-      preLoaderRoute: typeof ConnectionsRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/aichat': {
@@ -291,11 +228,74 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AichatRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/connections': {
+      id: '/connections'
+      path: '/connections'
+      fullPath: '/connections'
+      preLoaderRoute: typeof ConnectionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/file-scan': {
+      id: '/file-scan'
+      path: '/file-scan'
+      fullPath: '/file-scan'
+      preLoaderRoute: typeof FileScanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ip-scan': {
+      id: '/ip-scan'
+      path: '/ip-scan'
+      fullPath: '/ip-scan'
+      preLoaderRoute: typeof IpScanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/malware-lib': {
+      id: '/malware-lib'
+      path: '/malware-lib'
+      fullPath: '/malware-lib'
+      preLoaderRoute: typeof MalwareLibRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/phone-scan': {
+      id: '/phone-scan'
+      path: '/phone-scan'
+      fullPath: '/phone-scan'
+      preLoaderRoute: typeof PhoneScanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recon': {
+      id: '/recon'
+      path: '/recon'
+      fullPath: '/recon'
+      preLoaderRoute: typeof ReconRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rf-sonar': {
+      id: '/rf-sonar'
+      path: '/rf-sonar'
+      fullPath: '/rf-sonar'
+      preLoaderRoute: typeof RfSonarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terminal': {
+      id: '/terminal'
+      path: '/terminal'
+      fullPath: '/terminal'
+      preLoaderRoute: typeof TerminalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/traffic': {
+      id: '/traffic'
+      path: '/traffic'
+      fullPath: '/traffic'
+      preLoaderRoute: typeof TrafficRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/wireless': {
+      id: '/wireless'
+      path: '/wireless'
+      fullPath: '/wireless'
+      preLoaderRoute: typeof WirelessRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/hrv/': {
@@ -334,3 +334,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
