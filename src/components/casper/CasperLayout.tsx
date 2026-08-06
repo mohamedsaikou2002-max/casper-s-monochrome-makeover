@@ -3,7 +3,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import {
   Ghost, Menu, LayoutDashboard, Network, Activity, Wifi,
   Search, FileSearch, Smartphone, Bug, Terminal, MessageSquare,
-  Radio, HeartPulse,
+  Radio, HeartPulse, Radar,
 } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { useCasper } from "@/lib/casper-context";
@@ -15,6 +15,7 @@ const navItems = [
   { to: "/wireless", label: "Wireless", icon: Wifi },
   { to: "/rf-sonar", label: "RF Sonar", icon: Radio },
   { to: "/hrv", label: "HRV Frequency", icon: HeartPulse },
+  { to: "/recon", label: "Recon", icon: Radar },
   { to: "/ip-scan", label: "IP Scan", icon: Search },
   { to: "/file-scan", label: "File Scan", icon: FileSearch },
   { to: "/phone-scan", label: "Phone Scan", icon: Smartphone },

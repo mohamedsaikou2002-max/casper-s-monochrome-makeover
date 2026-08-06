@@ -13,6 +13,7 @@ import { Route as WirelessRouteImport } from './routes/wireless'
 import { Route as TrafficRouteImport } from './routes/traffic'
 import { Route as TerminalRouteImport } from './routes/terminal'
 import { Route as RfSonarRouteImport } from './routes/rf-sonar'
+import { Route as ReconRouteImport } from './routes/recon'
 import { Route as PhoneScanRouteImport } from './routes/phone-scan'
 import { Route as MalwareLibRouteImport } from './routes/malware-lib'
 import { Route as IpScanRouteImport } from './routes/ip-scan'
@@ -41,6 +42,11 @@ const TerminalRoute = TerminalRouteImport.update({
 const RfSonarRoute = RfSonarRouteImport.update({
   id: '/rf-sonar',
   path: '/rf-sonar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReconRoute = ReconRouteImport.update({
+  id: '/recon',
+  path: '/recon',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PhoneScanRoute = PhoneScanRouteImport.update({
@@ -97,6 +103,7 @@ export interface FileRoutesByFullPath {
   '/ip-scan': typeof IpScanRoute
   '/malware-lib': typeof MalwareLibRoute
   '/phone-scan': typeof PhoneScanRoute
+  '/recon': typeof ReconRoute
   '/rf-sonar': typeof RfSonarRoute
   '/terminal': typeof TerminalRoute
   '/traffic': typeof TrafficRoute
@@ -112,6 +119,7 @@ export interface FileRoutesByTo {
   '/ip-scan': typeof IpScanRoute
   '/malware-lib': typeof MalwareLibRoute
   '/phone-scan': typeof PhoneScanRoute
+  '/recon': typeof ReconRoute
   '/rf-sonar': typeof RfSonarRoute
   '/terminal': typeof TerminalRoute
   '/traffic': typeof TrafficRoute
@@ -128,6 +136,7 @@ export interface FileRoutesById {
   '/ip-scan': typeof IpScanRoute
   '/malware-lib': typeof MalwareLibRoute
   '/phone-scan': typeof PhoneScanRoute
+  '/recon': typeof ReconRoute
   '/rf-sonar': typeof RfSonarRoute
   '/terminal': typeof TerminalRoute
   '/traffic': typeof TrafficRoute
@@ -145,6 +154,7 @@ export interface FileRouteTypes {
     | '/ip-scan'
     | '/malware-lib'
     | '/phone-scan'
+    | '/recon'
     | '/rf-sonar'
     | '/terminal'
     | '/traffic'
@@ -160,6 +170,7 @@ export interface FileRouteTypes {
     | '/ip-scan'
     | '/malware-lib'
     | '/phone-scan'
+    | '/recon'
     | '/rf-sonar'
     | '/terminal'
     | '/traffic'
@@ -175,6 +186,7 @@ export interface FileRouteTypes {
     | '/ip-scan'
     | '/malware-lib'
     | '/phone-scan'
+    | '/recon'
     | '/rf-sonar'
     | '/terminal'
     | '/traffic'
@@ -191,6 +203,7 @@ export interface RootRouteChildren {
   IpScanRoute: typeof IpScanRoute
   MalwareLibRoute: typeof MalwareLibRoute
   PhoneScanRoute: typeof PhoneScanRoute
+  ReconRoute: typeof ReconRoute
   RfSonarRoute: typeof RfSonarRoute
   TerminalRoute: typeof TerminalRoute
   TrafficRoute: typeof TrafficRoute
@@ -227,6 +240,13 @@ declare module '@tanstack/react-router' {
       path: '/rf-sonar'
       fullPath: '/rf-sonar'
       preLoaderRoute: typeof RfSonarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recon': {
+      id: '/recon'
+      path: '/recon'
+      fullPath: '/recon'
+      preLoaderRoute: typeof ReconRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/phone-scan': {
@@ -303,6 +323,7 @@ const rootRouteChildren: RootRouteChildren = {
   IpScanRoute: IpScanRoute,
   MalwareLibRoute: MalwareLibRoute,
   PhoneScanRoute: PhoneScanRoute,
+  ReconRoute: ReconRoute,
   RfSonarRoute: RfSonarRoute,
   TerminalRoute: TerminalRoute,
   TrafficRoute: TrafficRoute,
@@ -313,13 +334,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
